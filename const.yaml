@@ -1,0 +1,27 @@
+description: pong_const
+hyperparameters:
+  lr: 1e-4
+  global_batch_size: 2
+  in_size: 288
+  env_name: PongNoFrameskip-v4
+  num_envs: 16
+  n_stack: 4
+  rollout_size: 9
+  curiousity: .15
+  icm_beta: .2
+  value_coeff: .4
+  entropy_coeff: .015
+  max_grad_norm: .9
+searcher:
+  name: single
+  metric: mean_reward
+  max_steps: 100 # 9 steps is ~ one epoch
+  smaller_is_better: false
+entrypoint: model_def:A2CTrial
+batches_per_step: 500
+max_restarts: 0
+min_validation_period: 2
+resources:
+  slots_per_trial: 2
+# environment:
+#   image: davidhershey/determined-a2c:1.0

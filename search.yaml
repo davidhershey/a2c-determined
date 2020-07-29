@@ -1,0 +1,38 @@
+description: breakout_search
+hyperparameters:
+  lr:
+    type: log
+    base: 10
+    minval: -5
+    maxval: -2
+  global_batch_size: 1
+  in_size: 288
+  env_name: BreakoutNoFrameskip-v4
+  num_envs: 8
+  n_stack: 8
+  rollout_size: 5
+  curiousity: .1
+  icm_beta: .2
+  value_coeff:
+    type: double
+    minval: .3
+    maxval: .5
+  entropy_coeff:
+    type: double
+    minval: .005
+    maxval: .025
+  max_grad_norm:
+    type: double
+    minval: 0.3
+    maxval: 2.0
+searcher:
+  name: adaptive_simple
+  metric: mean_reward
+  max_steps: 150
+  smaller_is_better: false
+  max_trials: 50
+  mode: conservative
+entrypoint: model_def:A2CTrial
+batches_per_step: 1000
+max_restarts: 0
+min_validation_period: 2
